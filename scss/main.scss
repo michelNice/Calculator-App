@@ -1,0 +1,232 @@
+@import '//scss/toggle.scss';
+
+:root {
+  --first-color: #fff;
+  --second-color: #000;
+  --third-color : #cdcdcd;
+  --fourth-color: #ff8c42;
+  --fifth-color:#ccc;
+  --sixth-color:#000;
+  --border-color:#555;
+  --bg-color: #054545;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow-y: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--first-color);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  background-color:var(--bg-color);
+}
+
+form {
+  input {
+    width: 100%;
+    padding: 0.5rem ;
+    box-sizing: border-box;
+    text-align: right;
+    background:var(--second-color);
+    color: var(--first-color);
+    font-size: 2.5rem;
+    border: 0;
+    border-radius: 10px 10px 0 0;
+    background: var(--second-color);
+
+  }
+}
+
+button {
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.4rem;
+  border: 1px solid var(--fifth-color);
+  background: var(--first-color);
+  transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease;
+  color:var(--second-color);
+  &:hover{background:rgba(137, 23, 23, 0);}
+}
+
+.conteiner {
+  width: 350px;   
+  height: 400px;   
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin:1rem 0;
+  transition: background-color 0.5s ease, border-color 0.5s ease;
+  .buttons {
+    display: grid;
+    flex: 1;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas:
+      "button1 button2 button3 button4"
+      "button5 button6 button7 button17"
+      "button8 button9 button10 button17"
+      "button11 button12 button13 button17"
+      "button14 button15 button16 button17";
+    gap:1px;
+    background: var(--border-color);
+    .button1  { grid-area: button1; }  // +
+    .button2  { grid-area: button2; }  // -
+    .button3  { grid-area: button3; }  // x
+    .button4  { grid-area: button4; }  // ÷
+    .button5  { grid-area: button5; }  // 7
+    .button6  { grid-area: button6; }  // 8
+    .button7  { grid-area: button7; }  // 9
+    .button8  { grid-area: button8; }  // 4
+    .button9  { grid-area: button9; }  // 5
+    .button10 { grid-area: button10; } // 6
+    .button11 { grid-area: button11; } // 1
+    .button12 { grid-area: button12; } // 2
+    .button13 { grid-area: button13; } // 3
+    .button14 {
+      grid-area: button14;             // 0
+      border-radius: 0 0 0 10px;
+    }
+    .button15 { grid-area: button15; } // .
+    .button16 { grid-area: button16; } // C
+
+    .button17 {
+      grid-area: button17;             // =
+      background: var(--fourth-color);
+      border-radius: 0 0 10px 0;
+    }
+    .sign{
+      background: var(--fifth-color);
+      color:var(--sixth-color);}
+      
+  }
+
+  
+}
+
+.the{
+  display: flex;
+  align-items: center;
+  justify-content:flex-start;
+  position:relative;
+  
+  .th{
+    position: absolute;
+    transform: translate(-70%,-75%);
+    right:70%;
+    top:80%;
+  }
+  
+}
+
+.theme-switcher{
+  display: flex;
+  flex-direction:column ;
+  align-items: flex-end;
+  color: var(--first-color);
+  gap: 0.5rem;
+}
+
+.theme-options{
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--first-color);
+  align-items: center;
+}
+
+.continer-switch{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.switch{
+  background: #252d44;
+  height: 25px;
+  width: 60px;
+  border-radius:0.7rem;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  padding:0 2px ;
+}
+.circle {
+  background-color: #d03f2f;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  left: 4px; 
+  transition: left 0.3s ease;
+}
+
+.main-conteiner{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.theme-1 {
+  --first-color: #fff;
+  --black-color: #000;
+  --third-color: #cdcdcd;
+  --fourth-color: #ff8c42;
+  --fifth-color:#ccc;
+  --border-color:#555;
+  --bg-color:#054545;
+}
+.theme-2 {
+  --first-color: #dcdcdc;
+  --second-color: #0a0a0a;
+  --third-color: #1e1e1e;
+  --fourth-color: #80cbc4; 
+  --fifth-color: #2a2a2a;
+  --sixth-color:#fff;
+  --border-color: #444;
+  --background-color: #121212;
+  --bg-color: #0d1117; 
+}
+
+.theme-3 {
+  --first-color: #fffbea;
+  --second-color: #301934;
+  --third-color: #f5e1da;
+  --orange-color: #ff3c38;
+  --fifth-color: #7d748c;
+  --sixth-color:#fff;
+  --border-color: #ffe156;
+  --background-color: #ffb400;
+  --bg-color: #6f2dbd; 
+}
+
+@media(max-width:76rem){
+
+  .conteiner{
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
