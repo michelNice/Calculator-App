@@ -29,8 +29,7 @@
             display.value = '0';
         }
     }
-    //deleteLastChar()
-
+ 
     function stopStartAndEnd(expr){
         return /^[x÷+\-\.]|[x÷+\-\.]$/.test(expr);
     }
@@ -40,25 +39,19 @@
         if(isOperator(buttonValue) && isOperator(display.value.slice(-1))){
             return;
         }
-            
-       
+
         if(buttonValue === '.'){
             const parts = display.value.split(/[+\-x÷]/)
             const lastNumber = parts[parts.length - 1]
             const current = display.value
             const newExpr = current + buttonValue
 
-            //if(isOperator(buttonValue) && isOperator(current.slice(-1)))return;
             
             if(lastNumber.includes('.')){
                 return
             }
-            /*
-            if(display.value === '0'){
-                display.value = '0.'
-            }
-            */ 
-            else if(isOperator(display.value.slice(-1))){
+           
+            if(isOperator(display.value.slice(-1))){
 
                 display.value += '0.';
             }else{
