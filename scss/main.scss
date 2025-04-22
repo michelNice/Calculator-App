@@ -161,7 +161,7 @@ button {
   position: relative;
   display: flex;
   justify-content: space-between;
-  padding:0 2px ;
+  padding:0 3px ;
 }
 .circle {
   background-color: #d03f2f;
@@ -170,7 +170,7 @@ button {
   border-radius: 50%;
   position: absolute;
   top: 4px;
-  left: 4px; 
+  left:4px; 
   transition: left 0.3s ease;
 }
 

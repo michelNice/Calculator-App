@@ -18,7 +18,7 @@ switchButton.addEventListener('click', ()=> {
             
         },
         3:{
-            left:'44px',
+            left:'40px',
             class:'theme-3'
         }
     }
@@ -34,7 +34,6 @@ switchButton.addEventListener('click', ()=> {
     circle.style.left = theme.left;
 
     body.classList.remove('theme-1','theme-2','theme-3')
-
 
     body.classList.add(theme.class)
 })

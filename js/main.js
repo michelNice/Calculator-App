@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded',function(){
+ document.addEventListener('DOMContentLoaded',function(){
     let btns = document.querySelectorAll('button');
     let display = document.querySelector('#display')
     
@@ -29,7 +29,11 @@ document.addEventListener('DOMContentLoaded',function(){
             display.value = '0';
         }
     }
-    deleteLastChar()
+    //deleteLastChar()
+
+    function stopStartAndEnd(expr){
+        return /^[x÷+\-\.]|[x÷+\-\.]$/.test(expr);
+    }
 
     function appendValue(buttonValue){
         
@@ -41,15 +45,19 @@ document.addEventListener('DOMContentLoaded',function(){
         if(buttonValue === '.'){
             const parts = display.value.split(/[+\-x÷]/)
             const lastNumber = parts[parts.length - 1]
+            const current = display.value
+            const newExpr = current + buttonValue
 
+            //if(isOperator(buttonValue) && isOperator(current.slice(-1)))return;
+            
             if(lastNumber.includes('.')){
                 return
             }
-            
+            /*
             if(display.value === '0'){
                 display.value = '0.'
             }
-                
+            */ 
             else if(isOperator(display.value.slice(-1))){
 
                 display.value += '0.';
@@ -58,7 +66,6 @@ document.addEventListener('DOMContentLoaded',function(){
             }
             return;
         }
-            
         display.value === '0' ? display.value = buttonValue : display.value += buttonValue
     
     }
