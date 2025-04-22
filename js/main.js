@@ -1,12 +1,21 @@
  document.addEventListener('DOMContentLoaded',function(){
     let btns = document.querySelectorAll('button');
     let display = document.querySelector('#display')
-    
+    let calculator = document.querySelector('.Calculator')
+
+    const saved = localStorage.getItem('calculatorValue')
+
+    display.value = saved ? saved : '0';
+
+    function salveTolocalStore(){
+        localStorage.setItem('calculatorValue', display.value)
+    }
+
     function displayValeu (){
         display.value = '0'
+
     }
    
-
     function isOperator(char){
         return 'x÷+-'.includes(char)
     }
@@ -19,6 +28,8 @@
         }catch{
             display.value = 'Error'
         }
+
+        salveTolocalStore()
     }
 
     function deleteLastChar(){
@@ -28,8 +39,12 @@
 
             display.value = '0';
         }
+
+        salveTolocalStore()
     }
-    deleteLastChar()
+
+   
+    //deleteLastChar()
 
     function stopStartAndEnd(expr){
         return /^[x÷+\-\.]|[x÷+\-\.]$/.test(expr);
@@ -40,8 +55,6 @@
         if(isOperator(buttonValue) && isOperator(display.value.slice(-1))){
             return;
         }
-            
-       
         if(buttonValue === '.'){
             const parts = display.value.split(/[+\-x÷]/)
             const lastNumber = parts[parts.length - 1]
@@ -63,6 +76,8 @@
             return;
         }
         display.value === '0' ? display.value = buttonValue : display.value += buttonValue
+
+        salveTolocalStore()
     
     }
 

@@ -37,3 +37,9 @@ switchButton.addEventListener('click', ()=> {
 
     body.classList.add(theme.class)
 })
+
+
+
+
+
+
