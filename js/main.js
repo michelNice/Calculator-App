@@ -24,6 +24,7 @@
         return 'x÷+-'.includes(char)
     }
 
+    
     function calculateResult(){
         try{
           let result =  eval(display.value.replace(/÷/g, '/').replace(/x/g, '*'))
