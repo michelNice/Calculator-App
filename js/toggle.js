@@ -1,40 +1,36 @@
-const switchButton = document.querySelector('.switch')
-const circle = document.querySelector('.circle')
-const body = document.querySelector('body')
-const button = document.querySelectorAll('.sign')
-const calculator = document.querySelector('.Calculator')
+const switchButton = document.querySelector('.switch');
+const circle = document.querySelector('.circle');
+const body = document.querySelector('body');
 
 let currentTheme = 1;
-let direction = 1
+let direction = 1;
 
-function localStoreToggle(){
-    const savedTheme = localStorage.getItem('theme')
+const themes = {
+    1: { left: '4px', class: 'theme-1' },
+    2: { left: '22px', class: 'theme-2' },
+    3: { left: '40px', class: 'theme-3' }
+};
 
-    if(savedTheme){
-        currentTheme = parseInt(savedTheme)
-
-        const themes = {
-            1: { left: '4px', class: 'theme-1' },
-            2: { left: '22px', class: 'theme-2' },
-            3: { left: '40px', class: 'theme-3' }
-        };
-
-        const theme = themes[currentTheme];
-
-
-        circle.style.left = theme.left;
-        body.classList.remove('theme-1', 'theme-2', 'theme-3');
-        body.classList.add(theme.class);
+// Load saved theme from localStorage
+function loadThemeFromLocalStorage() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme && themes[savedTheme]) {
+        currentTheme = Number(savedTheme);
+        circle.style.left = themes[currentTheme].left;
+        body.classList.add(themes[currentTheme].class);
+        
+        // Set direction to resume proper order (1 → 2 → 3 → 2 → 1 ...)
+        direction = currentTheme === 3 ? -1 : 1;
     }
 }
 
-switchButton.addEventListener('click', () => {
-    const themes = {
-        1: { left: '4px', class: 'theme-1' },
-        2: { left: '22px', class: 'theme-2' },
-        3: { left: '40px', class: 'theme-3' }
-    };
+// Save current theme to localStorage
+function saveThemeToLocalStorage(themeNumber) {
+    localStorage.setItem('theme', themeNumber);
+}
 
+// Theme switch on click
+switchButton.addEventListener('click', () => {
     currentTheme += direction;
 
     if (currentTheme === 3 || currentTheme === 1) {
@@ -44,26 +40,12 @@ switchButton.addEventListener('click', () => {
     const theme = themes[currentTheme];
 
     circle.style.left = theme.left;
+
     body.classList.remove('theme-1', 'theme-2', 'theme-3');
     body.classList.add(theme.class);
 
-    localStorage.setItem('theme', currentTheme);
+    saveThemeToLocalStorage(currentTheme);
 });
 
-localStoreToggle();
-
-
-let countdown = 20
-const timer = setInterval(()=> {
-
-    countdown--
-
-    console.log(countdown)
-
-
-    if(countdown < 0){
-
-        clearTimeout(timer)
-        console.log('timer')
-    }
-},1000)
+// Apply saved theme on page load
+loadThemeFromLocalStorage();
