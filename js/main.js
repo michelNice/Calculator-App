@@ -38,11 +38,16 @@
     }
 
     function deleteLastChar(){
+
         let updated =  display.value.slice(0,-1);
 
-        if(updated === '') updated = '0'
+        if(updated === ''){
+          updated = '0'  
+        } 
 
-        //salveTolocalStore()
+        display.value = updated
+
+        salveTolocalStore()
     }
 
     function stopStartAndEnd(expr){
