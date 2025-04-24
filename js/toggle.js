@@ -51,3 +51,19 @@ switchButton.addEventListener('click', () => {
 });
 
 localStoreToggle();
+
+
+let countdown = 20
+const timer = setInterval(()=> {
+
+    countdown--
+
+    console.log(countdown)
+
+
+    if(countdown < 0){
+
+        clearTimeout(timer)
+        console.log('timer')
+    }
+},1000)
