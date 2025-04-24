@@ -2,44 +2,52 @@ const switchButton = document.querySelector('.switch')
 const circle = document.querySelector('.circle')
 const body = document.querySelector('body')
 const button = document.querySelectorAll('.sign')
+const calculator = document.querySelector('.Calculator')
 
 let currentTheme = 1;
 let direction = 1
-switchButton.addEventListener('click', ()=> {
 
-    const themes = {
-        1:{
-            left:'4px',
-            class:'theme-1'
-        },
-        2:{
-            left:'22px',
-            class:'theme-2'
-            
-        },
-        3:{
-            left:'40px',
-            class:'theme-3'
-        }
+function localStoreToggle(){
+    const savedTheme = localStorage.getItem('theme')
+
+    if(savedTheme){
+        currentTheme = parseInt(savedTheme)
+
+        const themes = {
+            1: { left: '4px', class: 'theme-1' },
+            2: { left: '22px', class: 'theme-2' },
+            3: { left: '40px', class: 'theme-3' }
+        };
+
+        const theme = themes[currentTheme];
+
+
+        circle.style.left = theme.left;
+        body.classList.remove('theme-1', 'theme-2', 'theme-3');
+        body.classList.add(theme.class);
     }
+}
 
-    currentTheme += direction
+switchButton.addEventListener('click', () => {
+    const themes = {
+        1: { left: '4px', class: 'theme-1' },
+        2: { left: '22px', class: 'theme-2' },
+        3: { left: '40px', class: 'theme-3' }
+    };
 
-    if(currentTheme === 3 || currentTheme === 1){
+    currentTheme += direction;
+
+    if (currentTheme === 3 || currentTheme === 1) {
         direction *= -1;
     }
-    
-    const theme = themes[currentTheme]
+
+    const theme = themes[currentTheme];
 
     circle.style.left = theme.left;
+    body.classList.remove('theme-1', 'theme-2', 'theme-3');
+    body.classList.add(theme.class);
 
-    body.classList.remove('theme-1','theme-2','theme-3')
+    localStorage.setItem('theme', currentTheme);
+});
 
-    body.classList.add(theme.class)
-})
-
-
-
-
-
-
+localStoreToggle();

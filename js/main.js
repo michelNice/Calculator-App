@@ -1,8 +1,6 @@
  document.addEventListener('DOMContentLoaded',function(){
     let btns = document.querySelectorAll('button');
     let display = document.querySelector('#display')
-    let calculator = document.querySelector('.Calculator')
-
     const saved = localStorage.getItem('calculatorValue')
 
     display.value = saved ? saved : '0';
@@ -11,9 +9,15 @@
         localStorage.setItem('calculatorValue', display.value)
     }
 
-    function displayValeu (){
-        display.value = '0'
+    function updateDisplay(value){
+        display.value = value
+        salveTolocalStore();
+    }
 
+    function displayValeu (){
+        //display.value = '0'
+
+        updateDisplay('0')
     }
    
     function isOperator(char){
@@ -24,27 +28,22 @@
         try{
           let result =  eval(display.value.replace(/÷/g, '/').replace(/x/g, '*'))
 
-          display.value = Number(result).toFixed(3).replace(/\.?0+$/, '')
+          //display.value = Number(result).toFixed(3).replace()
+          updateDisplay(Number(result).toFixed(3).replace(/\.?0+$/, ''))
+
         }catch{
             display.value = 'Error'
         }
-
         salveTolocalStore()
     }
 
     function deleteLastChar(){
-        display.value = display.value.slice(0,-1);
+        let updated =  display.value.slice(0,-1);
 
-        if(display.value === ''){
+        if(updated === '') updated = '0'
 
-            display.value = '0';
-        }
-
-        salveTolocalStore()
+        //salveTolocalStore()
     }
-
-   
-    //deleteLastChar()
 
     function stopStartAndEnd(expr){
         return /^[x÷+\-\.]|[x÷+\-\.]$/.test(expr);
@@ -66,7 +65,6 @@
             if(lastNumber.includes('.')){
                 return
             }
-            
             else if(isOperator(display.value.slice(-1))){
 
                 display.value += '0.';
@@ -75,9 +73,13 @@
             }
             return;
         }
+        
         display.value === '0' ? display.value = buttonValue : display.value += buttonValue
 
         salveTolocalStore()
+        
+
+        //display.value === '0' ? updateDisplay(buttonValue) : updateDisplay(displayValeu + buttonValue);
     
     }
 
