@@ -5,16 +5,16 @@
 
     display.value = saved ? saved : '0';
 
-    function salveTolocalStore(){
+    function saveTolocalStore(){
         localStorage.setItem('calculatorValue', display.value)
     }
 
     function updateDisplay(value){
         display.value = value
-        salveTolocalStore();
+        saveTolocalStore();
     }
 
-    function displayValeu (){
+    function displayValue (){
         //display.value = '0'
 
         updateDisplay('0')
@@ -26,6 +26,11 @@
 
     
     function calculateResult(){
+
+        if(!stopStartAndEnd()){
+            return;
+        }
+
         try{
           let result =  eval(display.value.replace(/÷/g, '/').replace(/x/g, '*'))
 
@@ -35,7 +40,7 @@
         }catch{
             display.value = 'Error'
         }
-        salveTolocalStore()
+        saveTolocalStore()
     }
 
     function deleteLastChar(){
@@ -48,13 +53,28 @@
 
         display.value = updated
 
-        salveTolocalStore()
+        saveTolocalStore()
+
     }
 
-    function stopStartAndEnd(expr){
-        return /^[x÷+\-\.]|[x÷+\-\.]$/.test(expr);
+    /*
+    function stopStartAndEnd() {
+        const value = display.value;
+        const lastChar = value.slice(-1);
+        const firstChar = value.charAt(0);
+    
+        const invalidLastChars = ['÷', '-', '+', 'x', '.', '(', '%'];
+        const validStartChars = ['+', '-'];
+    
+        // Check if the first character is an operator and ensure it's not an invalid first character
+        if (invalidLastChars.includes(lastChar) || (firstChar === '' || (invalidLastChars.includes(firstChar) && !validStartChars.includes(firstChar)))) {
+            return false;
+        } else {
+            return true;
+        }
     }
-
+    */
+    
     function appendValue(buttonValue){
         
         if(isOperator(buttonValue) && isOperator(display.value.slice(-1))){
@@ -64,7 +84,7 @@
             const parts = display.value.split(/[+\-x÷]/)
             const lastNumber = parts[parts.length - 1]
             const current = display.value
-            const newExpr = current + buttonValue
+            //const newExpr = current + buttonValue
 
             if(isOperator(buttonValue) && isOperator(current.slice(-1)))return;
             
@@ -82,9 +102,9 @@
         
         display.value === '0' ? display.value = buttonValue : display.value += buttonValue
 
-        salveTolocalStore()
+        saveTolocalStore()
+        stopStartAndEnd()
         
-
         //display.value === '0' ? updateDisplay(buttonValue) : updateDisplay(displayValeu + buttonValue);
     
     }
@@ -93,7 +113,7 @@
         const keyborder = {
         'Enter':calculateResult,
         'Backspace':deleteLastChar,
-        'c':displayValeu,
+        'c':displayValue,
         '1':()=> appendValue('1'),
         '2':()=> appendValue('2'),
         '3':()=> appendValue('3'),
@@ -125,9 +145,11 @@
 
            const buttonValue = this.value
 
+           console.log(buttonValue)
+
             switch(buttonValue){
                 case 'C':
-                  displayValeu()
+                  displayValue()
                   break
                 case '=':
                     calculateResult()
