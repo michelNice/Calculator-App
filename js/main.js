@@ -57,7 +57,7 @@
 
     }
 
-    /*
+    
     function stopStartAndEnd() {
         const value = display.value;
         const lastChar = value.slice(-1);
@@ -73,7 +73,7 @@
             return true;
         }
     }
-    */
+    
     
     function appendValue(buttonValue){
         
