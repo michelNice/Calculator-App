@@ -26,6 +26,7 @@ function loadThemeFromLocalStorage() {
 
 // Save current theme to localStorage
 function saveThemeToLocalStorage(themeNumber) {
+
     localStorage.setItem('theme', themeNumber);
 }
 
@@ -47,5 +48,5 @@ switchButton.addEventListener('click', () => {
     saveThemeToLocalStorage(currentTheme);
 });
 
-// Apply saved theme on page load
+
 loadThemeFromLocalStorage();
